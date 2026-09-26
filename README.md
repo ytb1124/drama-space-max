@@ -94,6 +94,7 @@ The public repository is a curated subset of the original 6.5 GB project archive
 
 ## Publications
 
+- [Research paper in English](docs/corrective-ir-paper-en.pdf) - *Corrective Impulse Response Generation and Real-Time Convolution for Spatial Reconstruction*
 - [Research paper in Korean](docs/corrective-ir-paper-ko.pdf) - *Generation of Corrective Impulse Responses and a Real-Time Convolution System for Spatial Reproduction*
 - [Stage Sound Magazine Vol. 19 article in Korean](docs/corrective-ir-ssm-vol19-ko.pdf) - *Can We Make the Current Venue Sound Like Another Hall? Building a Spatial Reproduction System*
 
