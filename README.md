@@ -1,4 +1,4 @@
-# Corrective IR Spatial Reconstruction
+# Compensation Filter Spatial Reconstruction
 
 This repository documents an experimental live sound system that uses measured impulse responses to bring the early response and reverberant impression of a target hall into a different performance venue.
 
@@ -13,7 +13,7 @@ stage-rigged AB microphone pair
         ↓
 six measured loudspeaker-to-microphone system paths
         ↓
-per-channel corrective FIR generation in Python
+per-channel FIR compensation filter generation in Python
         ↓
 real-time convolution in Max/MSP
         ↓
@@ -35,13 +35,13 @@ The Python pipeline:
 
 The live implementation used a hybrid structure:
 
-- The corrective FIR focused on the initial response, approximately the first 40 ms.
+- The FIR compensation filter focused on the initial response, approximately the first 40 ms.
 - The target-hall IR from approximately 200 ms onward was applied separately as a reverberation tail through Convology XT.
 - The 40-200 ms region functioned as a transition rather than a separately validated inverse-correction region.
 
 ## Evaluation
 
-Evaluation compared the target IR with the result of convolving each measured current-system path with its corrective FIR. Within the initial 0-40 ms window and the 125 Hz-4 kHz correction band, the mean spectral error across the six surround channels decreased from **2.69 dB to 2.24 dB**. All six channels showed a reduction; the largest changes were measured on SRC (3.17 to 2.17 dB) and SLF (2.27 to 1.47 dB).
+Evaluation compared the target IR with the result of convolving each measured current-system path with its FIR compensation filter. Within the initial 0-40 ms window and the 125 Hz-4 kHz correction band, the mean spectral error across the six surround channels decreased from **2.69 dB to 2.24 dB**. All six channels showed a reduction; the largest changes were measured on SRC (3.17 to 2.17 dB) and SLF (2.27 to 1.47 dB).
 
 These results are a first-stage numerical validation at a defined measurement position, centered on the fourth audience row, using the same measurements involved in filter generation. They do not demonstrate equivalent responses throughout the audience area or a perceptual match to the target hall. No controlled listening test was conducted in this study.
 
@@ -67,7 +67,7 @@ The principal FIR generator is `other/make_club_to_hall_fir_v31_plus3.py`. In th
 python3 other/make_club_to_hall_fir_v31_plus3.py \
   --club "/path/to/current-system-ir.wav" \
   --hall "/path/to/target-hall-ir.wav" \
-  --out "/path/to/corrective-fir.wav" \
+  --out "/path/to/compensation-filter.wav" \
   --mode mono \
   --band_low 125 \
   --band_high 4000 \
@@ -86,7 +86,7 @@ The script writes the FIR as a WAV file and prints JSON-formatted diagnostic met
 - `code/` - JavaScript and Node for Max helpers
 - `other/` - Python FIR and IR conversion scripts
 - `250930 hwacon2/IR/` - measured current-system-path IRs used for the six surround channels
-- `250930 hwacon2/CF/` - generated channel-specific corrective FIRs
+- `250930 hwacon2/CF/` - generated channel-specific FIR compensation filters
 - `data/` - Max and Convology XT snapshots
 - `media/` and `final backup/` - selected reference images and representative outputs retained from the working archive
 
@@ -94,8 +94,8 @@ The public repository is a curated subset of the original 6.5 GB project archive
 
 ## Publications
 
-- [Research paper in English](docs/corrective-ir-paper-en.pdf) - *Corrective Impulse Response Generation and Real-Time Convolution for Spatial Reconstruction*
-- [Research paper in Korean](docs/corrective-ir-paper-ko.pdf) - *Generation of Corrective Impulse Responses and a Real-Time Convolution System for Spatial Reproduction*
+- [Research paper in English](docs/corrective-ir-paper-en.pdf) - *Compensation Filter Generation and Real-Time Convolution for Spatial Reconstruction*
+- [Research paper in Korean](docs/corrective-ir-paper-ko.pdf) - *Generation of Compensation Filters and a Real-Time Convolution System for Spatial Reproduction*
 - [Stage Sound Magazine Vol. 19 article in Korean](docs/corrective-ir-ssm-vol19-ko.pdf) - *Can We Make the Current Venue Sound Like Another Hall? Building a Spatial Reproduction System*
 
 ## Attribution and third-party material
